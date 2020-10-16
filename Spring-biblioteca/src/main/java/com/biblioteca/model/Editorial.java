@@ -18,7 +18,7 @@ public class Editorial {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_editorial;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String nombreEditorial;
 	
 	@Column

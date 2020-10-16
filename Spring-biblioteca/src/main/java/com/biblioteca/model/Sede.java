@@ -24,7 +24,7 @@ public class Sede {
 	@Column
 	private Long telefono;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String direccion;
 	
 	@OneToMany(mappedBy = "sede")

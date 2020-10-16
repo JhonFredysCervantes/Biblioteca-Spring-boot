@@ -7,5 +7,7 @@ import com.biblioteca.model.Editorial;
 
 @Repository
 public interface EditorialRepository extends JpaRepository<Editorial, Long> {
-
+	
+	Editorial findByNombreEditorial(String nombreEditorial);
+	
 }

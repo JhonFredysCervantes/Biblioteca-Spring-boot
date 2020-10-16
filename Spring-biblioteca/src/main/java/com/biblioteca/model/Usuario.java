@@ -24,7 +24,7 @@ public class Usuario {
 	@Column(nullable = false, unique = true)
 	private String cc;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String email;
 	
 	@Column(nullable = false)
