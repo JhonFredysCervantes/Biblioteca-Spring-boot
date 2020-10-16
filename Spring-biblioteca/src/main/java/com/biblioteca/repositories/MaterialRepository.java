@@ -8,4 +8,5 @@ import com.biblioteca.model.Material;
 @Repository
 public interface MaterialRepository extends JpaRepository<Material, Long> {
 
+	Material findBytitulo(String titulo);
 }
