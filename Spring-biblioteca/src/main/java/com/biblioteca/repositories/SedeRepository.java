@@ -10,7 +10,7 @@ import com.biblioteca.model.Sede;
 @Repository
 public interface SedeRepository extends JpaRepository<Sede, Long> {
 	
-	List<Sede> findByDireccion(String direccion);
+	Sede findByDireccion(String direccion);
 	List<Sede> findByNombre(String nombre);
 	
 	

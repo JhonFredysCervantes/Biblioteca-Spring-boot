@@ -12,5 +12,6 @@ public interface IUsuarioService {
 	
 	List<Usuario> listarTodosUsuarios();
 	Usuario buscarUsuarioId(Long id);
-	Usuario buscarUsuarioCc(Long cc);
+	Usuario buscarUsuarioCc(String cc);
+	Usuario buscarUsuarioEmail(String email);
 }
