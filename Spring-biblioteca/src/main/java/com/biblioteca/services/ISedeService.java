@@ -8,6 +8,10 @@ public interface ISedeService {
 
 	Sede crearSede(Sede s);
 	Sede actualizarSede(Sede s); 
-	boolean eliminarSede(Sede s);
+	void eliminarSede(Sede s);
+	
 	List<Sede> listarTodosSedes();
+	Sede buscarSedeId(Long id);
+	Sede buscarPorDireccion(String dir);
+	List<Sede> buscarPorNombre(String nombre);
 }

@@ -8,6 +8,9 @@ public interface IUsuarioService {
 
 	Usuario crearUsuario(Usuario u);
 	Usuario actualizarUsuario(Usuario u); 
-	boolean eliminarUsuario(Usuario u);
+	void eliminarUsuario(Usuario u);
+	
 	List<Usuario> listarTodosUsuarios();
+	Usuario buscarUsuarioId(Long id);
+	Usuario buscarUsuarioCc(Long cc);
 }

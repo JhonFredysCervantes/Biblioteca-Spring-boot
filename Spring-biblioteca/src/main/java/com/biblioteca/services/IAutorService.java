@@ -8,6 +8,9 @@ public interface IAutorService {
 
 	Autor crearAutor(Autor a);
 	Autor actualizarAutor(Autor a); 
-	boolean eliminarAutor(Autor a);
+	void eliminarAutor(Autor a);
+	
+	
 	List<Autor> listarTodosAutores();
+	Autor buscarAutorId(Long id);
 }

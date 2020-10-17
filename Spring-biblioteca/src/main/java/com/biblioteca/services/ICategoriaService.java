@@ -8,6 +8,8 @@ public interface ICategoriaService {
 
 	Categoria crearCategoria(Categoria c);
 	Categoria actualizarCategoria(Categoria c); 
-	boolean eliminarCategoria(Categoria c);
+	void eliminarCategoria(Categoria c);
+	
+	Categoria buscarCategoriaId(Long id);
 	List<Categoria> listarTodasCategorias();
 }

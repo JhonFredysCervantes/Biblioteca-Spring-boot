@@ -9,6 +9,7 @@ public interface IPalabraService {
 
 	PalabraClave crearPalabraClave(PalabraClave p);
 	PalabraClave actualizarPalabraClave(PalabraClave p); 
-	boolean eliminarPalabraClave(PalabraClave p);
+	void eliminarPalabraClave(PalabraClave p);
+	
 	List<PalabraClave> listarTodasPalabras();
 }

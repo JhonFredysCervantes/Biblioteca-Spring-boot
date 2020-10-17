@@ -7,7 +7,10 @@ import com.biblioteca.model.Prestamo;
 public interface IPrestamoService {
 
 	Prestamo crearPrestamo(Prestamo p);
-	boolean eliminarPrestamo(Prestamo p);
+	Prestamo actualizarPrestamo(Prestamo p);
+	
 	List<Prestamo> listarTodosPrestamo();
-	//List<Prestamo> listarPrestamosPorUsuario(Usuario u);
+	Prestamo buscarPrestamoId(Long id);
+	
+	//List<Prestamo listarPrestamosPorUsuario(Usuario u);
 }

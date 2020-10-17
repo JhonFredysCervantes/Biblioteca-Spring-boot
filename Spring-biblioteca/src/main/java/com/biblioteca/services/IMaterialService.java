@@ -9,6 +9,8 @@ public interface IMaterialService {
 
 	Material crearMaterial(Material m);
 	Material actualizarMaterial(Material m); 
-	boolean eliminarMaterial(Material m);
+	void eliminarMaterial(Material m);
+	
 	List<Material> listarTodosAutores();
+	Material buscarMaterialId(Long id);
 }

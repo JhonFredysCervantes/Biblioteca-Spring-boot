@@ -9,6 +9,7 @@ public interface IEditorialService {
 
 	Editorial crearEditorial(Editorial e);
 	Editorial actualizarEditorial(Editorial e); 
-	boolean eliminarEditorial(Editorial e);
+	void  eliminarEditorial(Editorial e);
+	
 	List<Editorial> listarEditoriales();
 }
