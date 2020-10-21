@@ -34,4 +34,9 @@ public class PalabraServiceImp implements IPalabraService {
 		return pr.findAll();
 	}
 
+	@Override
+	public PalabraClave buscarPalabraId(Long id) {
+		return pr.getOne(id);
+	}
+
 }

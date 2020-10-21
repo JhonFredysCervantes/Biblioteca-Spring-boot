@@ -33,8 +33,12 @@ public class EditorialServiceImp implements IEditorialService {
 
 	@Override
 	public List<Editorial> listarEditoriales() {
-
 		return er.findAll();
+	}
+
+	@Override
+	public Editorial buscarEditorialId(Long id) {
+		return er.getOne(id);
 	}
 
 }

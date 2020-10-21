@@ -75,6 +75,86 @@ public class Material {
 		this.titulo = titulo;
 		this.fechaPublicacion = fechaPublicacion;
 	}
+
+	public Long getId_material() {
+		return id_material;
+	}
+
+	public void setId_material(Long id_material) {
+		this.id_material = id_material;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getIdioma() {
+		return idioma;
+	}
+
+	public void setIdioma(String idioma) {
+		this.idioma = idioma;
+	}
+
+	public Date getFechaPublicacion() {
+		return fechaPublicacion;
+	}
+
+	public void setFechaPublicacion(Date fechaPublicacion) {
+		this.fechaPublicacion = fechaPublicacion;
+	}
+
+	public Editorial getEd() {
+		return ed;
+	}
+
+	public void setEd(Editorial ed) {
+		this.ed = ed;
+	}
+
+	public Categoria getCt() {
+		return ct;
+	}
+
+	public void setCt(Categoria ct) {
+		this.ct = ct;
+	}
+
+	public Set<Prestamo> getPrestamos() {
+		return prestamos;
+	}
+
+	public void setPrestamos(Set<Prestamo> prestamos) {
+		this.prestamos = prestamos;
+	}
+
+	public List<SedeLibro> getSedes() {
+		return sedes;
+	}
+
+	public void setSedes(List<SedeLibro> sedes) {
+		this.sedes = sedes;
+	}
+
+	public List<Autor> getAutores() {
+		return autores;
+	}
+
+	public void setAutores(List<Autor> autores) {
+		this.autores = autores;
+	}
 	
 	
 }

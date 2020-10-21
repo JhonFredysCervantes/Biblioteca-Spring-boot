@@ -2,7 +2,6 @@ package com.biblioteca.services;
 
 import java.util.List;
 
-
 import com.biblioteca.model.PalabraClave;
 
 public interface IPalabraService {
@@ -12,4 +11,5 @@ public interface IPalabraService {
 	void eliminarPalabraClave(PalabraClave p);
 	
 	List<PalabraClave> listarTodasPalabras();
+	PalabraClave buscarPalabraId(Long id);
 }

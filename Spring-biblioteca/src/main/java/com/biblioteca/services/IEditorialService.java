@@ -12,4 +12,5 @@ public interface IEditorialService {
 	void  eliminarEditorial(Editorial e);
 	
 	List<Editorial> listarEditoriales();
+	Editorial buscarEditorialId(Long id);
 }
