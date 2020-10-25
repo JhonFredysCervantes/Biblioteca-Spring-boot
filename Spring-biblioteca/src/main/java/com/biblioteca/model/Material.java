@@ -60,6 +60,12 @@ public class Material {
 	inverseJoinColumns=@JoinColumn( name="autor_id", referencedColumnName="id_autor"))
 	private List<Autor> autores;
 	
+	@ManyToMany
+	@JoinTable(name="PalabraMaterial",
+	joinColumns= @JoinColumn( name="material_id", referencedColumnName="id_material"), 
+	inverseJoinColumns=@JoinColumn( name="palabra_id", referencedColumnName="id_palabra"))
+	private List<PalabraClave> palabras;
+	
 	protected Material() {super();}
 
 	public Material(String titulo, String descripcion, String idioma, Date fechaPublicacion) {
@@ -155,6 +161,15 @@ public class Material {
 	public void setAutores(List<Autor> autores) {
 		this.autores = autores;
 	}
+
+	public List<PalabraClave> getPalabras() {
+		return palabras;
+	}
+
+	public void setPalabras(List<PalabraClave> palabras) {
+		this.palabras = palabras;
+	}
+	
 	
 	
 }

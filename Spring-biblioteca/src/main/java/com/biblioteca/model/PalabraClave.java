@@ -1,10 +1,13 @@
 package com.biblioteca.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity @Table(name="palabrasclaves")
@@ -13,6 +16,9 @@ public class PalabraClave {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_palabra;
+	
+	@ManyToMany(mappedBy = "palabras")
+	private List<Material> materiales;
 	
 	@Column(nullable = false)
 	private String palabra;
@@ -38,6 +44,15 @@ public class PalabraClave {
 	public void setPalabra(String palabra) {
 		this.palabra = palabra;
 	}
+
+	public List<Material> getMateriales() {
+		return materiales;
+	}
+
+	public void setMateriales(List<Material> materiales) {
+		this.materiales = materiales;
+	}
+	
 	
 	
 	
