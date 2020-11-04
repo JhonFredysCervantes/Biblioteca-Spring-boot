@@ -20,7 +20,10 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity @Table(name="materiales")
+@JsonIgnoreProperties({"prestamos"})
 public class Material {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,24 +45,29 @@ public class Material {
 	
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id_editorial")
+	@JsonIgnoreProperties({"materiales"})
 	private Editorial ed;
 	
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id_categoria")
+	@JsonIgnoreProperties({"materiales"})
 	private Categoria ct;
 	
 	@OneToMany(mappedBy = "materiales")
 	private Set<Prestamo> prestamos;
 	
 	@OneToMany(mappedBy = "libros")
+	@JsonIgnoreProperties({"libros"})
 	List<SedeLibro> sedes;
 	
 	@ManyToMany
 	@JoinTable(name="AutorMaterial",
 	joinColumns= @JoinColumn( name="material_id", referencedColumnName="id_material"), 
 	inverseJoinColumns=@JoinColumn( name="autor_id", referencedColumnName="id_autor"))
+	@JsonIgnoreProperties({"autoria"})
 	private List<Autor> autores;
 	
+	/*Relacion con palabra clave*/
 	@ManyToMany
 	@JoinTable(name="PalabraMaterial",
 	joinColumns= @JoinColumn( name="material_id", referencedColumnName="id_material"), 

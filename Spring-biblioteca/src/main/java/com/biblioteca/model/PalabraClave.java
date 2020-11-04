@@ -19,6 +19,7 @@ public class PalabraClave {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_palabra;
 	
+	/*Relacion con material*/
 	@ManyToMany(mappedBy = "palabras")
 	@JsonIgnoreProperties({"palabras"})
 	private List<Material> materiales;

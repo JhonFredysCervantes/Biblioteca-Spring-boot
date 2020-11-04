@@ -15,6 +15,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity @Table(name="usuarios")
 public class Usuario {
 	@Id
@@ -57,6 +59,7 @@ public class Usuario {
 	private String direccionResidencia;
 	
 	@OneToMany(mappedBy = "usuario")
+	@JsonIgnoreProperties({"usuario"})
 	private Set<Prestamo> prestamo;
 	
 	protected Usuario() {super();}

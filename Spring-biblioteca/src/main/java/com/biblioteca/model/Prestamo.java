@@ -15,6 +15,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity	@Table(name="prestamos")
 public class Prestamo {
 	
@@ -41,10 +43,12 @@ public class Prestamo {
 	
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id_material")
+	@JsonIgnoreProperties({"prestamos"})
 	private Material materiales;
 	
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id_usuario")
+	@JsonIgnoreProperties({"prestamo"})
 	private Usuario usuario;
 	
 	protected Prestamo() {super();}
