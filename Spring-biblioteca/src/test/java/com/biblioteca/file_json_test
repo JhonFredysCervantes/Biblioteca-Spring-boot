@@ -1,1 +1,82 @@
 #################### JSON PARA TEST ######################
+
+
+ Autor
+		{	"primerNombre" : "Nicolas",
+			"segundoNombre" : "Andres",
+			"primerApellido" : "Vargas",
+			"segundoApellido" : "Rojas",
+			"genero" : "M",
+			"email" : "nicolasvargasr@unimagdalena.edu.co",
+			"nacimiento" : "1999-06-21",
+			"fallecimiento" : null,
+			"autoria" : null
+		}
+		
+ Categoria
+		{	"nombreCategoria" : "Drama",
+			"materiales" : null
+		}	
+		
+Editorial
+		{	"nombreEditorial" : "Norma",
+			"sitioWeb" : "www.norma.com.co",
+			"email" : "norma@gmail.com.co",
+			"materiales" : null,
+		}
+		
+Material
+		{	"titulo" : "Programacion para tontos",
+			"descripcion" : "Libro de programacion para principiantes",
+			"idioma" : "español",
+			"fechaPublicacion" : "2012-06-15",
+			"ed" : null,
+			"ct" : null,
+			"prestamos" : null,
+			"sedes" : null,
+			"autores" : null,
+			"palabras" : null
+		}
+		
+PalabraClave
+		{	"materiales" : null,
+			"palabra" : "Programacion"
+		}
+		
+Prestamo
+		{	"fechaPrestamo" : "2020-06-17",
+			"fechaEntregar" : "2020-07-17",
+			"fechaEntregado" : "2020-06-29",
+			"sede" : null,
+			"materiales" : null,
+			"usuario" : null
+		}
+		
+Sede
+		{	"nombre" : "Biblioteca Principal",
+			"telefono" : "4356897",
+			"direccion" : "Av Libertador Calle 14",
+			"prestamos" : null,
+			"materiales" : null,
+		}
+		
+SedeLibro
+		{	"numejemplares" : 10,
+			"sedes" : null,
+			"libros" : null
+		}
+		
+Usuario
+			{	"cc": "1083056089",
+			 	"email" : "jhonfredysc@unimagdalena.edu.co",
+			 	"contrasena" : "1234"
+			 	"primerNombre" : "Jhon",
+				"segundoNombre" : "Fredys",
+				"primerApellido" : "Cervantes",
+				"segundoApellido" : "Romo",
+				"genero" : "M",
+				"telefono" : 3013456789,
+				"nacimiento" : "2000-06-21",
+				"direccionResidencia" : "Malvinas, barrio coleto",
+				"prestamo" : null
+			}

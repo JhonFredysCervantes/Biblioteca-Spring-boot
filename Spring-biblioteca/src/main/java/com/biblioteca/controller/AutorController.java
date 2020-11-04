@@ -26,6 +26,8 @@ public class AutorController {
 	@Autowired 
 	IAutorService aService;
 	
+	/*http://localhost:8080/autor/...*/
+	
 	//CREAR UN AUTOR
 	@PostMapping("/crear")
 	public Autor crear(@RequestBody Autor a) {

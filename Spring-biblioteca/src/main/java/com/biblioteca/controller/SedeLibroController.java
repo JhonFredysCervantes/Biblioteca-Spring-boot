@@ -24,6 +24,8 @@ public class SedeLibroController {
 	@Autowired 
 	ISedeLibroService slService;
 	
+	/*http://localhost:8080/sedelibro/...*/
+	
 	//CREAR UNA SEDE
 	@PostMapping("/crear")
 	public SedeLibro crear(@RequestBody SedeLibro s) {

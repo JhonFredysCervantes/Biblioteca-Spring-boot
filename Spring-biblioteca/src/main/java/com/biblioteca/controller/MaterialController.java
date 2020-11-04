@@ -29,6 +29,8 @@ public class MaterialController {
 	@Autowired 
 	IMaterialService mService;
 	
+	/*http://localhost:8080/material/...*/
+	
 	//CREAR UN MATERIAL
 	@PostMapping("/crear")
 	public Material crear(@RequestBody Material m) {

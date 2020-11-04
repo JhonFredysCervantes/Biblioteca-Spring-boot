@@ -22,6 +22,8 @@ public class PalabraController {
 	@Autowired 
 	IPalabraService pService;
 	
+	/*http://localhost:8080/palabra/...*/
+	
 	//CREAR UNA PALABRA
 	@PostMapping("/crear")
 	public PalabraClave crear(@RequestBody PalabraClave p) {

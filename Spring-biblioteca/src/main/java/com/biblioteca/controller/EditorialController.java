@@ -25,6 +25,8 @@ public class EditorialController {
 	@Autowired 
 	IEditorialService eService;
 	
+	/*http://localhost:8080/editorial/...*/
+	
 	//CREAR UNA EDITORIAL
 	@PostMapping("/crear")
 	public Editorial crear(@RequestBody Editorial e) {
@@ -58,7 +60,7 @@ public class EditorialController {
 		eService.eliminarEditorial(e);
 	}
 	
-	//LISTANDO TODAS LAS EDITORIALEs
+	//LISTANDO TODAS LAS EDITORIALES
 	@GetMapping("/listareditoriales")
 	public List<Editorial> listaEditoriales(){
 		return eService.listarEditoriales();

@@ -26,6 +26,8 @@ public class UsuarioController {
 	@Autowired 
 	IUsuarioService uService;
 	
+	/*http://localhost:8080/usuario/...*/
+	
 	//CREAR UN AUTOR
 	@PostMapping("/crear")
 	public Usuario crear(@RequestBody Usuario u) {

@@ -26,6 +26,8 @@ public class SedeController {
 	@Autowired 
 	ISedeService sService;
 	
+	/*http://localhost:8080/sede/...*/
+	
 	//CREAR UNA SEDE
 	@PostMapping("/crear")
 	public Sede crear(@RequestBody Sede s) {

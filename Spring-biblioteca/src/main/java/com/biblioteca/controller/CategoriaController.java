@@ -25,6 +25,8 @@ public class CategoriaController {
 	@Autowired 
 	ICategoriaService cService;
 	
+	/*http://localhost:8080/categoria/...*/
+	
 	//CREAR UNA CATEGORIA
 	@PostMapping("/crear")
 	public Categoria crear(@RequestBody Categoria c) {

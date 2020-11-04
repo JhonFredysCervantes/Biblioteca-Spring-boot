@@ -26,6 +26,8 @@ public class PrestamoController {
 	@Autowired 
 	IPrestamoService prService;
 	
+	/*http://localhost:8080/prestamo/...*/
+	
 	//CREAR UN PRESTAMO
 	@PostMapping("/crear")
 	public Prestamo crear(@RequestBody Prestamo p) {
