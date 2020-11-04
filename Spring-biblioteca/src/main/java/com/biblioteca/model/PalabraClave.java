@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity @Table(name="palabrasclaves")
 public class PalabraClave {
 	
@@ -18,6 +20,7 @@ public class PalabraClave {
 	private Long id_palabra;
 	
 	@ManyToMany(mappedBy = "palabras")
+	@JsonIgnoreProperties({"palabras"})
 	private List<Material> materiales;
 	
 	@Column(nullable = false)

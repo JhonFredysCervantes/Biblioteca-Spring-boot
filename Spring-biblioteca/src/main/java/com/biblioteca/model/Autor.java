@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +15,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity @Table(name="autores")
 public class Autor {
@@ -49,7 +52,8 @@ public class Autor {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fallecimiento;
 	
-	@ManyToMany(mappedBy = "autores")
+	@ManyToMany(mappedBy = "autores", fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({"autores"})
 	private List<Material> autoria;
 	
 	protected Autor() {super();}
