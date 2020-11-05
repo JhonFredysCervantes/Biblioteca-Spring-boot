@@ -40,4 +40,9 @@ public class AutorServiceImp implements IAutorService {
 		return ar.getOne(id);
 	}
 
+	@Override
+	public List<Autor> buscarPrimerNombreYApellido(String primer_nombre, String primer_apellido) {
+		return ar.findByPrimerNombreAndPrimerApellido(primer_nombre, primer_apellido);
+	}
+
 }

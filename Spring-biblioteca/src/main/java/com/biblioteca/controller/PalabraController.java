@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.biblioteca.model.Material;
 import com.biblioteca.model.PalabraClave;
 import com.biblioteca.services.IPalabraService;
 
@@ -37,6 +39,9 @@ public class PalabraController {
 		
 		String palabra = p.getPalabra();
 		oldPalabra.setPalabra(palabra);
+		List<Material> materiales = p.getMateriales();
+		oldPalabra.setMateriales(materiales);
+		
 		
 		return pService.actualizarPalabraClave(oldPalabra);
 	}

@@ -81,5 +81,10 @@ public class AutorController {
 	public List<Autor> listarAutores(){
 		return aService.listarTodosAutores();
 	}
+	//Falta revisar este metodo
+	@GetMapping("/buscarnombre/{firstname}_{lastname}")
+	public List<Autor> buscarPorNombre(@PathVariable("firstname") String primerNombre,@PathVariable("lastname") String primerApellido){
+		return aService.buscarPrimerNombreYApellido(primerNombre, primerApellido);
+	}
 
 }

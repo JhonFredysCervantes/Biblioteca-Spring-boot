@@ -13,4 +13,5 @@ public interface IAutorService {
 	
 	List<Autor> listarTodosAutores();
 	Autor buscarAutorId(Long id);
+	List<Autor> buscarPrimerNombreYApellido(String primer_nombre, String primer_apellido);
 }

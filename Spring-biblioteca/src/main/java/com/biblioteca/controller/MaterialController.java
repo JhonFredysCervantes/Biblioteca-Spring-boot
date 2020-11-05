@@ -18,6 +18,7 @@ import com.biblioteca.model.Autor;
 import com.biblioteca.model.Categoria;
 import com.biblioteca.model.Editorial;
 import com.biblioteca.model.Material;
+import com.biblioteca.model.PalabraClave;
 import com.biblioteca.model.Prestamo;
 import com.biblioteca.model.SedeLibro;
 import com.biblioteca.services.IMaterialService;
@@ -68,6 +69,9 @@ public class MaterialController {
 		
 		List<Autor> autores = m.getAutores();
 		oldMaterial.setAutores(autores);
+		
+		List<PalabraClave> palabras = m.getPalabras();
+		oldMaterial.setPalabras(palabras);
 		
 		return mService.actualizarMaterial(oldMaterial);
 	}
