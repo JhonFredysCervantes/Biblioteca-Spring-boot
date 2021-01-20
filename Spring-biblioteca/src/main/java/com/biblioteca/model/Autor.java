@@ -36,11 +36,14 @@ public class Autor {
 	@Column
 	private String segundoApellido;
 	
-	@Column
+	@Column(length = 1)
 	private Character genero;
 	
-	@Column(nullable = false)
+	@Column
 	private String email;
+	
+	@Column
+	private String tituloAcademico;
 	
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
@@ -56,7 +59,7 @@ public class Autor {
 	@JsonIgnoreProperties({"autores"})
 	private List<Material> autoria;
 	
-	protected Autor() {super();}
+	protected Autor() {}
 
 	public Autor(String primerNombre, String segundoNombre, String primerApellido, String segundoApellido,
 			Character genero, String email, Date nacimiento, Date fallecimiento) {
@@ -155,6 +158,14 @@ public class Autor {
 
 	public void setAutoria(List<Material> autoria) {
 		this.autoria = autoria;
+	}
+
+	public String getTituloAcademico() {
+		return tituloAcademico;
+	}
+
+	public void setTituloAcademico(String tituloAcademico) {
+		this.tituloAcademico = tituloAcademico;
 	}
 	
 	

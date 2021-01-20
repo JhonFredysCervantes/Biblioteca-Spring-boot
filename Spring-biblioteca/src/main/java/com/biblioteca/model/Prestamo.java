@@ -38,16 +38,16 @@ public class Prestamo {
 	private Date fechaEntregado;
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "id_sede")
+	@JoinColumn(referencedColumnName = "id_sede", name = "id_sede")
 	private Sede sede;
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "id_material")
+	@JoinColumn(referencedColumnName = "id_material", name = "id_material")
 	@JsonIgnoreProperties({"prestamos"})
 	private Material materiales;
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "id_usuario")
+	@JoinColumn(referencedColumnName = "id_usuario",name = "id_usuario")
 	@JsonIgnoreProperties({"prestamo"})
 	private Usuario usuario;
 	

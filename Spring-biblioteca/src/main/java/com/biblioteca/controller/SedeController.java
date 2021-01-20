@@ -1,6 +1,7 @@
 package com.biblioteca.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,43 +30,62 @@ public class SedeController {
 	/*http://localhost:8080/sede/...*/
 	
 	//CREAR UNA SEDE
-	@PostMapping("/crear")
+	@PostMapping
 	public Sede crear(@RequestBody Sede s) {
 		return sService.crearSede(s);
 	}
 	
 	//EDITAR UNA SEDE
-	@PutMapping("/editar/{id}")
+	@PutMapping("/{id}")
 	public Sede editar(@RequestBody Sede s, @PathVariable("id") Long id) {
-		Sede oldSede = sService.buscarSedeId(id);
 		
-		String nombre = s.getNombre();
-		oldSede.setNombre(nombre);
-		
-		Long telefono = s.getTelefono();
-		oldSede.setTelefono(telefono);
-		
-		String direccion = s.getDireccion();
-		oldSede.setDireccion(direccion);
-		
-		Set<Prestamo> prestamos = s.getPrestamos();
-		oldSede.setPrestamos(prestamos);
-		
-		List<SedeLibro> materiales = s.getMateriales();
-		oldSede.setMateriales(materiales);
-		
-		return sService.actualizarSede(oldSede);
+		if(id!=null) {
+			Optional<Sede> resultado = sService.buscarSedeId(id);
+			
+			if(resultado.isPresent()) {
+				Sede oldSede = resultado.get();
+						
+				String nombre = s.getNombre();
+				oldSede.setNombre(nombre);
+				
+				Long telefono = s.getTelefono();
+				oldSede.setTelefono(telefono);
+				
+				String direccion = s.getDireccion();
+				oldSede.setDireccion(direccion);
+				
+				Set<Prestamo> prestamos = s.getPrestamos();
+				oldSede.setPrestamos(prestamos);
+				
+				List<SedeLibro> materiales = s.getMateriales();
+				oldSede.setMateriales(materiales);
+				
+				return sService.actualizarSede(oldSede);
+			}
+		}
+		return null;
+	}
+	
+	//BUSCAR POR NOMBRE DE SEDE
+	@GetMapping("/buscarNombre/{name}")
+	public List<Sede> buscarPorNombre(@PathVariable("name")String nombre) {
+		return sService.buscarPorNombre(nombre);
+	}
+	
+	//BUSCAR POR DIRECCIÓ DE SEDE
+	@GetMapping("/buscarDireccion/{dir}")
+	public Sede buscarPorDireccion(@PathVariable("dir")String direccion) {
+		return sService.buscarPorDireccion(direccion);
 	}
 	
 	//ELIMINAR UNA SEDE
-	@DeleteMapping("/eliminar/{id}")
+	@DeleteMapping("/{id}")
 	public void eliminar(@PathVariable("id") Long id) {
-		Sede s = sService.buscarSedeId(id);
-		sService.eliminarSede(s);
+		sService.eliminarSede(id);
 	}
 	
 	//LISTANDO TODAS LAS SEDES
-	@GetMapping("/listarsedes")
+	@GetMapping
 	public List<Sede> listarSedes(){
 		return sService.listarTodosSedes();
 	}

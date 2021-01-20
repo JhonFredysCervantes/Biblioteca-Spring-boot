@@ -2,6 +2,7 @@ package com.biblioteca.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,65 +29,85 @@ public class UsuarioController {
 	
 	/*http://localhost:8080/usuario/...*/
 	
-	//CREAR UN AUTOR
-	@PostMapping("/crear")
+	//CREAR UN USUARIO
+	@PostMapping
 	public Usuario crear(@RequestBody Usuario u) {
 		return uService.crearUsuario(u);
 	}
 	
-	//EDITAR UN AUTOR
-	@PutMapping("/editar/{id}")
+	//EDITAR UN USUARIO
+	@PutMapping("/{id}")
 	public Usuario editar(@RequestBody Usuario u, @PathVariable("id") Long id) {
-		Usuario oldUsuario = uService.buscarUsuarioId(id);
 		
-		String cc = u.getCc();
-		oldUsuario.setCc(cc);
-		
-		String email = u.getEmail();
-		oldUsuario.setEmail(email);
-		
-		String contrasena = u.getContrasena();
-		oldUsuario.setContrasena(contrasena);
-		
-		String primer_nombre = u.getPrimerNombre();
-		oldUsuario.setPrimerNombre(primer_nombre);
-		
-		String segundo_nombre = u.getSegundoNombre();
-		oldUsuario.setSegundoNombre(segundo_nombre);
-		
-		String primer_apellido = u.getPrimerApellido();
-		oldUsuario.setPrimerApellido(primer_apellido);
-		
-		String segundo_apellido = u.getSegundoApellido();
-		oldUsuario.setSegundoApellido(segundo_apellido);
-		
-		Character genero = u.getGenero();
-		oldUsuario.setGenero(genero);
-		
-		Long telefono = u.getTelefono();
-		oldUsuario.setTelefono(telefono);
-		
-		Date nacimiento = u.getNacimiento();
-		oldUsuario.setNacimiento(nacimiento);
-		
-		String direccion = u.getDireccionResidencia();
-		oldUsuario.setDireccionResidencia(direccion);
-		
-		Set<Prestamo> prestamo = u.getPrestamo();
-		oldUsuario.setPrestamo(prestamo);
-		
-		return uService.actualizarUsuario(oldUsuario);
+		if(id!=null) {
+			Optional<Usuario> resultado = uService.buscarUsuarioId(id);
+			
+			if(resultado.isPresent()) {
+				String cadena;
+				Usuario oldUsuario = resultado.get();
+						
+				cadena = u.getCc();
+				oldUsuario.setCc(cadena);
+				
+				cadena = u.getEmail();
+				oldUsuario.setEmail(cadena);
+				
+				cadena = u.getContrasena();
+				oldUsuario.setContrasena(cadena);
+				
+				cadena = u.getPrimerNombre();
+				oldUsuario.setPrimerNombre(cadena);
+				
+				cadena = u.getSegundoNombre();
+				oldUsuario.setSegundoNombre(cadena);
+				
+				cadena = u.getPrimerApellido();
+				oldUsuario.setPrimerApellido(cadena);
+				
+				cadena = u.getSegundoApellido();
+				oldUsuario.setSegundoApellido(cadena);
+				
+				Character genero = u.getGenero();
+				oldUsuario.setGenero(genero);
+				
+				Long telefono = u.getTelefono();
+				oldUsuario.setTelefono(telefono);
+				
+				Date nacimiento = u.getNacimiento();
+				oldUsuario.setNacimiento(nacimiento);
+				
+				cadena = u.getDireccionResidencia();
+				oldUsuario.setDireccionResidencia(cadena);
+				
+				Set<Prestamo> prestamo = u.getPrestamo();
+				oldUsuario.setPrestamo(prestamo);
+				
+				return uService.actualizarUsuario(oldUsuario);
+			}
+		}
+		return null;
 	}
 	
 	//ELIMINAR UN USUARIO
-	@DeleteMapping("/eliminar/{id}")
+	@DeleteMapping("/{id}")
 	public void eliminar(@PathVariable("id") Long id) {
-		Usuario u = uService.buscarUsuarioId(id);
-		uService.eliminarUsuario(u);
+		uService.eliminarUsuario(id);
 	}
 	
+	// BUSCAR POR CC
+	@GetMapping("/identificacion/{cc}")
+	public Usuario buscarPorCedula(@PathVariable("cc")String cc){
+		return uService.buscarUsuarioCc(cc);
+	}
+	
+	// BUSCAR POR EMAIL
+		@GetMapping("/email/{e}")
+		public Usuario buscarPorEmail(@PathVariable("e")String email){
+			return uService.buscarUsuarioCc(email);
+		}
+	
 	//LISTANDO TODOS LOS USUARIOS
-	@GetMapping("/listarusuarios")
+	@GetMapping
 	public List<Usuario> listarUsuarios(){
 		return uService.listarTodosUsuarios();
 	}

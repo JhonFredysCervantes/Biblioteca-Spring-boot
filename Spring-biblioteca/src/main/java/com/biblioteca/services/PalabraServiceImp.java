@@ -1,6 +1,7 @@
 package com.biblioteca.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ public class PalabraServiceImp implements IPalabraService {
 	}
 
 	@Override
-	public void eliminarPalabraClave(PalabraClave p) {
-		pr.delete(p);
+	public void eliminarPalabraClave(Long id) {
+		pr.deleteById(id);
 	}
 
 	@Override
@@ -35,8 +36,8 @@ public class PalabraServiceImp implements IPalabraService {
 	}
 
 	@Override
-	public PalabraClave buscarPalabraId(Long id) {
-		return pr.getOne(id);
+	public Optional<PalabraClave> buscarPalabraId(Long id) {
+		return pr.findById(id);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.biblioteca.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class AutorServiceImp implements IAutorService {
 	}
 
 	@Override
-	public void eliminarAutor(Autor a) {
-		ar.delete(a);
+	public void eliminarAutor(Long id) {
+		ar.deleteById(id);
 	}
 
 	@Override
@@ -36,8 +37,8 @@ public class AutorServiceImp implements IAutorService {
 	}
 	
 	@Override
-	public Autor buscarAutorId(Long id) {
-		return ar.getOne(id);
+	public Optional<Autor> buscarAutorId(Long id) {
+		return ar.findById(id);
 	}
 
 	@Override

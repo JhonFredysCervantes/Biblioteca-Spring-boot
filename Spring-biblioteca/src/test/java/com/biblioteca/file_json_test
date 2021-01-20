@@ -22,7 +22,7 @@ Editorial
 		{	"nombreEditorial" : "Norma",
 			"sitioWeb" : "www.norma.com.co",
 			"email" : "norma@gmail.com.co",
-			"materiales" : null,
+			"materiales" : null
 		}
 		
 Material
@@ -57,7 +57,7 @@ Sede
 			"telefono" : "4356897",
 			"direccion" : "Av Libertador Calle 14",
 			"prestamos" : null,
-			"materiales" : null,
+			"materiales" : null
 		}
 		
 SedeLibro
@@ -69,7 +69,7 @@ SedeLibro
 Usuario
 			{	"cc": "1083056089",
 			 	"email" : "jhonfredysc@unimagdalena.edu.co",
-			 	"contrasena" : "1234"
+			 	"contrasena" : "1234",
 			 	"primerNombre" : "Jhon",
 				"segundoNombre" : "Fredys",
 				"primerApellido" : "Cervantes",

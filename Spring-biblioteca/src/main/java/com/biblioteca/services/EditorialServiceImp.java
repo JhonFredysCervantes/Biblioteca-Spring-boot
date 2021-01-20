@@ -1,6 +1,7 @@
 package com.biblioteca.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,8 @@ public class EditorialServiceImp implements IEditorialService {
 	}
 
 	@Override
-	public void eliminarEditorial(Editorial e) {
-		er.delete(e);
+	public void eliminarEditorial(Long id) {
+		er.deleteById(id);
 	}
 
 	@Override
@@ -37,8 +38,8 @@ public class EditorialServiceImp implements IEditorialService {
 	}
 
 	@Override
-	public Editorial buscarEditorialId(Long id) {
-		return er.getOne(id);
+	public Optional<Editorial> buscarEditorialId(Long id) {
+		return er.findById(id);
 	}
 
 }

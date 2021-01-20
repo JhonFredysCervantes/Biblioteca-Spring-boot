@@ -1,7 +1,7 @@
 package com.biblioteca.controller;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,34 +27,43 @@ public class PalabraController {
 	/*http://localhost:8080/palabra/...*/
 	
 	//CREAR UNA PALABRA
-	@PostMapping("/crear")
+	@PostMapping
 	public PalabraClave crear(@RequestBody PalabraClave p) {
 		return pService.crearPalabraClave(p);
 	}
 	
 	//EDITAR UNA PALABRA
-	@PutMapping("/editar/{id}")
+	@PutMapping("/{id}")
 	public PalabraClave editar(@RequestBody PalabraClave p, @PathVariable("id") Long id) {
-		PalabraClave oldPalabra = pService.buscarPalabraId(id);
 		
-		String palabra = p.getPalabra();
-		oldPalabra.setPalabra(palabra);
-		List<Material> materiales = p.getMateriales();
-		oldPalabra.setMateriales(materiales);
+		if(id!=null) {
+			Optional<PalabraClave> resultado = pService.buscarPalabraId(id);
+			
+			if(resultado.isPresent()) {
+				PalabraClave oldPalabra = resultado.get();
+						
+				String palabra = p.getPalabra();
+				oldPalabra.setPalabra(palabra);
+				List<Material> materiales = p.getMateriales();
+				oldPalabra.setMateriales(materiales);
+				
+				
+				return pService.actualizarPalabraClave(oldPalabra);
+			}
+		}
 		
+		return null;
 		
-		return pService.actualizarPalabraClave(oldPalabra);
 	}
 	
 	//ELIMINAR UNA PALABRA
-	@DeleteMapping("/eliminar/{id}")
+	@DeleteMapping("/{id}")
 	public void eliminar(@PathVariable("id") Long id) {
-		PalabraClave p = pService.buscarPalabraId(id);
-		pService.eliminarPalabraClave(p);
+		pService.eliminarPalabraClave(id);
 	}
 	
 	//LISTANDO TODAS LAS PALABRAS
-	@GetMapping("/listarpalabras")
+	@GetMapping
 	public List<PalabraClave> listarPalabras(){
 		return pService.listarTodasPalabras();
 	}

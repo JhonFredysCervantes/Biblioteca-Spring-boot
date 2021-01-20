@@ -1,6 +1,7 @@
 package com.biblioteca.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,8 @@ public class PrestamoServiceImp implements IPrestamoService {
 	}
 
 	@Override
-	public Prestamo buscarPrestamoId(Long id) {
-		return pr.getOne(id);
+	public Optional<Prestamo> buscarPrestamoId(Long id) {
+		return pr.findById(id);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.biblioteca.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ public class SedeLibroImp implements ISedeLibroService {
 	}
 
 	@Override
-	public void eliminarSedeLibro(SedeLibro s) {
-		slr.delete(s);
+	public void eliminarSedeLibro(Long id) {
+		slr.deleteById(id);
 	}
 
 	@Override
@@ -35,8 +36,8 @@ public class SedeLibroImp implements ISedeLibroService {
 	}
 
 	@Override
-	public SedeLibro buscarSedeLibrosId(Long id) {
-		return slr.getOne(id);
+	public Optional<SedeLibro> buscarSedeLibrosId(Long id) {
+		return slr.findById(id);
 	}
 
 }

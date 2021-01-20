@@ -1,6 +1,7 @@
 package com.biblioteca.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,37 +28,45 @@ public class SedeLibroController {
 	/*http://localhost:8080/sedelibro/...*/
 	
 	//CREAR UNA SEDE
-	@PostMapping("/crear")
+	@PostMapping
 	public SedeLibro crear(@RequestBody SedeLibro s) {
 		return slService.crearSedeLibro(s);
 	}
 	
 	//EDITAR UNA SEDE
-	@PutMapping("/editar/{id}")
+	@PutMapping("/{id}")
 	public SedeLibro editar(@RequestBody SedeLibro s, @PathVariable("id") Long id) {
-		SedeLibro oldSede = slService.buscarSedeLibrosId(id);
 		
-		int numeroejemplares = s.getNumejemplares();
-		oldSede.setNumejemplares(numeroejemplares);
+		if(id!=null) {
+			Optional<SedeLibro> resultado = slService.buscarSedeLibrosId(id);
+			
+			if(resultado.isPresent()) {
+				SedeLibro oldSede = resultado.get();
+						
+				int numeroejemplares = s.getNumejemplares();
+				oldSede.setNumejemplares(numeroejemplares);
+				
+				Sede sedes = s.getSedes();
+				oldSede.setSedes(sedes);
+				
+				Material libros = s.getLibros();
+				oldSede.setLibros(libros);
+				
+				return slService.actualizarSedeLibro(oldSede);
+			}
+		}
 		
-		Sede sedes = s.getSedes();
-		oldSede.setSedes(sedes);
-		
-		Material libros = s.getLibros();
-		oldSede.setLibros(libros);
-		
-		return slService.actualizarSedeLibro(oldSede);
+		return null;
 	}
 	
 	//ELIMINAR UNA SEDE
-	@DeleteMapping("/eliminar/{id}")
+	@DeleteMapping("/{id}")
 	public void eliminar(@PathVariable("id") Long id) {
-		SedeLibro s = slService.buscarSedeLibrosId(id);
-		slService.eliminarSedeLibro(s);
+		slService.eliminarSedeLibro(id);
 	}
 	
 	//LISTANDO TODAS LAS SEDES
-	@GetMapping("/listarsedes")
+	@GetMapping
 	public List<SedeLibro> listarSedes(){
 		return slService.listarSedeLibros();
 	}

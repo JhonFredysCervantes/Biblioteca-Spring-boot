@@ -2,6 +2,7 @@ package com.biblioteca.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,61 +34,85 @@ public class MaterialController {
 	/*http://localhost:8080/material/...*/
 	
 	//CREAR UN MATERIAL
-	@PostMapping("/crear")
+	@PostMapping
 	public Material crear(@RequestBody Material m) {
 		return mService.crearMaterial(m);
 	}
 	
 	//EDITAR UN MATERIAL
-	@PutMapping("/editar/{id}")
+	@PutMapping("/{id}")
 	public Material editar(@RequestBody Material m, @PathVariable("id") Long id) {
-		Material oldMaterial = mService.buscarMaterialId(id);
 		
-		String titulo = m.getTitulo();
-		oldMaterial.setTitulo(titulo);
+		if(id!=null) {
+			Optional<Material> resultado = mService.buscarMaterialId(id);
+			
+			if(resultado.isPresent()) {
+				
+				String cadena;
+				Material oldMaterial = resultado.get();
+						
+				cadena = m.getTitulo();
+				oldMaterial.setTitulo(cadena);
+				
+				cadena = m.getDescripcion();
+				oldMaterial.setDescripcion(cadena);
+				
+				cadena = m.getIdioma();
+				oldMaterial.setIdioma(cadena);
+				
+				Date fechaPublicacion = m.getFechaPublicacion();
+				oldMaterial.setFechaPublicacion(fechaPublicacion);
+				
+				Editorial editorial = m.getEd();
+				oldMaterial.setEd(editorial);
+				
+				Categoria categoria = m.getCt();
+				oldMaterial.setCt(categoria);
+				
+				Set<Prestamo> prestamos = m.getPrestamos();
+				oldMaterial.setPrestamos(prestamos);
+				
+				List<SedeLibro> sedes = m.getSedes();
+				oldMaterial.setSedes(sedes);
+				
+				List<Autor> autores = m.getAutores();
+				oldMaterial.setAutores(autores);
+				
+				List<PalabraClave> palabras = m.getPalabras();
+				oldMaterial.setPalabras(palabras);
+				
+				return mService.actualizarMaterial(oldMaterial);
+				
+			}
+		}
+		return null;
+	}
+	
+	//BUSCAR MATERIAL
+	@GetMapping("/{id}")
+	public Material buscar(@PathVariable("id")Long id) {
 		
-		String descripcion = m.getDescripcion();
-		oldMaterial.setDescripcion(descripcion);
+		if(id!=null) {
+			Optional<Material> resultado = mService.buscarMaterialId(id);
+			
+			if(resultado.isPresent()) {
+				return resultado.get();
+			}
+		}
 		
-		String idioma = m.getIdioma();
-		oldMaterial.setIdioma(idioma);
-		
-		Date fechaPublicacion = m.getFechaPublicacion();
-		oldMaterial.setFechaPublicacion(fechaPublicacion);
-		
-		Editorial editorial = m.getEd();
-		oldMaterial.setEd(editorial);
-		
-		Categoria categoria = m.getCt();
-		oldMaterial.setCt(categoria);
-		
-		Set<Prestamo> prestamos = m.getPrestamos();
-		oldMaterial.setPrestamos(prestamos);
-		
-		List<SedeLibro> sedes = m.getSedes();
-		oldMaterial.setSedes(sedes);
-		
-		List<Autor> autores = m.getAutores();
-		oldMaterial.setAutores(autores);
-		
-		List<PalabraClave> palabras = m.getPalabras();
-		oldMaterial.setPalabras(palabras);
-		
-		return mService.actualizarMaterial(oldMaterial);
+		return null;
 	}
 	
 	//ELIMINAR UN MATERIAL
-	@DeleteMapping("/eliminar/{id}")
+	@DeleteMapping("/{id}")
 	public void eliminar(@PathVariable("id") Long id) {
-		Material m = mService.buscarMaterialId(id);
-		mService.eliminarMaterial(m);
+		mService.eliminarMaterial(id);
 	}
 	
 	//LISTANDO TODOS LOS MATERIALEs
-	@GetMapping("/listarmateriales")
+	@GetMapping
 	public List<Material> listarMateriales(){
 		return mService.listarTodosAutores();
 	}
-	
 	
 }

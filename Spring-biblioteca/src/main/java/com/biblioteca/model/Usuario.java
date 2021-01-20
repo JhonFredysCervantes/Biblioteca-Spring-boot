@@ -56,7 +56,7 @@ public class Usuario {
 	private Date nacimiento;
 	
 	@Column(nullable = false)
-	private String direccionResidencia;
+	private String direccion;
 	
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties({"usuario"})
@@ -78,7 +78,7 @@ public class Usuario {
 		this.genero = genero;
 		this.telefono = telefono;
 		this.nacimiento = nacimiento;
-		this.direccionResidencia = direccionResidencia;
+		this.direccion = direccionResidencia;
 	}
 
 	public Usuario(String cc, String email, String contrasena, String primerNombre, String primerApellido,
@@ -90,7 +90,7 @@ public class Usuario {
 		this.primerNombre = primerNombre;
 		this.primerApellido = primerApellido;
 		this.telefono = telefono;
-		this.direccionResidencia = direccionResidencia;
+		this.direccion = direccionResidencia;
 	}
 
 	public Long getId_usuario() {
@@ -182,11 +182,11 @@ public class Usuario {
 	}
 
 	public String getDireccionResidencia() {
-		return direccionResidencia;
+		return direccion;
 	}
 
 	public void setDireccionResidencia(String direccionResidencia) {
-		this.direccionResidencia = direccionResidencia;
+		this.direccion = direccionResidencia;
 	}
 
 	public Set<Prestamo> getPrestamo() {

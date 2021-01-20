@@ -1,6 +1,7 @@
 package com.biblioteca.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.biblioteca.model.Autor;
 
@@ -8,10 +9,9 @@ public interface IAutorService {
 
 	Autor crearAutor(Autor a);
 	Autor actualizarAutor(Autor a); 
-	void eliminarAutor(Autor a);
-	
-	
+	Optional<Autor> buscarAutorId(Long id);
 	List<Autor> listarTodosAutores();
-	Autor buscarAutorId(Long id);
+	void eliminarAutor(Long id);
+	
 	List<Autor> buscarPrimerNombreYApellido(String primer_nombre, String primer_apellido);
 }

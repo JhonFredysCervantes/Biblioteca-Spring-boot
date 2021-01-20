@@ -1,6 +1,7 @@
 package com.biblioteca.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,13 +26,13 @@ public class CategoriaServiceImp implements ICategoriaService {
 	}
 
 	@Override
-	public void eliminarCategoria(Categoria c) {
-		cr.delete(c);
+	public void eliminarCategoria(Long id) {
+		cr.deleteById(id);
 	}
 
 	@Override
-	public Categoria buscarCategoriaId(Long id) {
-		return cr.getOne(id);
+	public Optional<Categoria> buscarCategoriaId(Long id) {
+		return cr.findById(id);
 	}
 
 	@Override

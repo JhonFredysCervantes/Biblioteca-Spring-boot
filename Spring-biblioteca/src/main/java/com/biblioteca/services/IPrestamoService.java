@@ -1,6 +1,7 @@
 package com.biblioteca.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.biblioteca.model.Prestamo;
 
@@ -10,7 +11,7 @@ public interface IPrestamoService {
 	Prestamo actualizarPrestamo(Prestamo p);
 	
 	List<Prestamo> listarTodosPrestamo();
-	Prestamo buscarPrestamoId(Long id);
+	Optional<Prestamo> buscarPrestamoId(Long id);
 	
 	//List<Prestamo listarPrestamosPorUsuario(Usuario u);
 }

@@ -1,6 +1,7 @@
 package com.biblioteca.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,40 +29,50 @@ public class EditorialController {
 	/*http://localhost:8080/editorial/...*/
 	
 	//CREAR UNA EDITORIAL
-	@PostMapping("/crear")
+	@PostMapping
 	public Editorial crear(@RequestBody Editorial e) {
 		return eService.crearEditorial(e);
 	}
 	
 	//EDITAR UNA EDITORIAL
-	@PutMapping("/editar/{id}")
+	@PutMapping("/{id}")
 	public Editorial editar(@RequestBody Editorial e, @PathVariable("id") Long id) {
-		Editorial oldEditorial = eService.buscarEditorialId(id);
 		
-		String nombre_editorial = e.getNombreEditorial();
-		oldEditorial.setNombreEditorial(nombre_editorial);
+		if(id!=null) {
+			
+			Optional<Editorial> resultado = eService.buscarEditorialId(id);
+			
+			if(resultado.isPresent()) {
+				String cadena;
+				Editorial oldEditorial = resultado.get();
+						
+				cadena = e.getNombreEditorial();
+				oldEditorial.setNombreEditorial(cadena);
+				
+				cadena = e.getSitioWeb();
+				oldEditorial.setSitioWeb(cadena);
+				
+				cadena = e.getEmail();
+				oldEditorial.setEmail(cadena);
+				
+				Set<Material> materiales = e.getMateriales();
+				oldEditorial.setMateriales(materiales);
+				
+				return eService.actualizarEditorial(oldEditorial);
+			}
+		}
 		
-		String sitioWeb = e.getSitioWeb();
-		oldEditorial.setSitioWeb(sitioWeb);
-		
-		String email = e.getEmail();
-		oldEditorial.setEmail(email);
-		
-		Set<Material> materiales = e.getMateriales();
-		oldEditorial.setMateriales(materiales);
-		
-		return eService.actualizarEditorial(oldEditorial);
+		return null;
 	}
 	
 	//ELIMINAR UNA EDITORIAL
-	@DeleteMapping("/eliminar/{id}")
+	@DeleteMapping("/{id}")
 	public void eliminar(@PathVariable("id") Long id) {
-		Editorial e = eService.buscarEditorialId(id);
-		eService.eliminarEditorial(e);
+		eService.eliminarEditorial(id);
 	}
 	
 	//LISTANDO TODAS LAS EDITORIALES
-	@GetMapping("/listareditoriales")
+	@GetMapping
 	public List<Editorial> listaEditoriales(){
 		return eService.listarEditoriales();
 	}

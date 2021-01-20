@@ -3,8 +3,10 @@ package com.biblioteca.model;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,10 +32,14 @@ public class Sede {
 	@Column(nullable = false, unique = true)
 	private String direccion;
 	
-	@OneToMany(mappedBy = "sede")
+	@OneToMany(mappedBy = "sede", 
+			fetch = FetchType.LAZY, 
+			cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH,CascadeType.MERGE})
 	private Set<Prestamo> prestamos;
 	
-	@OneToMany(mappedBy = "sedes")
+	@OneToMany(mappedBy = "sedes",
+			fetch = FetchType.LAZY, 
+			cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH,CascadeType.MERGE})
 	List<SedeLibro> materiales;
 	
 	protected Sede() {super();}

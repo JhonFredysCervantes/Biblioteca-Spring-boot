@@ -2,6 +2,7 @@ package com.biblioteca.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,48 +27,57 @@ public class PrestamoController {
 	@Autowired 
 	IPrestamoService prService;
 	
-	/*http://localhost:8080/prestamo/...*/
-	
 	//CREAR UN PRESTAMO
-	@PostMapping("/crear")
+	@PostMapping
 	public Prestamo crear(@RequestBody Prestamo p) {
 		return prService.crearPrestamo(p);
 	}
 	
 	//EDITAR UN PRESTAMO
-	@PutMapping("/editar/{id}")
+	@PutMapping("/{id}")
 	public Prestamo editar(@RequestBody Prestamo p, @PathVariable("id") Long id) {
-		Prestamo oldPrestamo = prService.buscarPrestamoId(id);
 		
-		Date fechaPrestamo = p.getFechaPrestamo();
-		oldPrestamo.setFechaPrestamo(fechaPrestamo);
-		
-		Date fechaEntregar = p.getFechaEntregar();
-		oldPrestamo.setFechaEntregar(fechaEntregar);
+		if(id!=null) {
+			Optional<Prestamo> resultado = prService.buscarPrestamoId(id);
+			
+			if(resultado.isPresent()) {
+				
+				Prestamo oldPrestamo = resultado.get();
+				
+				Date fechaPrestamo = p.getFechaPrestamo();
+				oldPrestamo.setFechaPrestamo(fechaPrestamo);
+				
+				Date fechaEntregar = p.getFechaEntregar();
+				oldPrestamo.setFechaEntregar(fechaEntregar);
 
-		Date fechaEntregado = p.getFechaEntregado();
-		oldPrestamo.setFechaEntregado(fechaEntregado);
-		
-		Sede sede = p.getSede();
-		oldPrestamo.setSede(sede);
-		
-		Material materiales = p.getMateriales();
-		oldPrestamo.setMateriales(materiales);
-		
-		Usuario usuario = p.getUsuario();
-		oldPrestamo.setUsuario(usuario);
-		
-		return prService.actualizarPrestamo(oldPrestamo);
+				Date fechaEntregado = p.getFechaEntregado();
+				oldPrestamo.setFechaEntregado(fechaEntregado);
+				
+				Sede sede = p.getSede();
+				oldPrestamo.setSede(sede);
+				
+				Material materiales = p.getMateriales();
+				oldPrestamo.setMateriales(materiales);
+				
+				Usuario usuario = p.getUsuario();
+				oldPrestamo.setUsuario(usuario);
+				
+				return prService.actualizarPrestamo(oldPrestamo);
+			}
+		}
+		return null;
 	}
 	
 	//No se implementa el eliminar, para tener registro de todos los prestamos
 	
 	//LISTANDO TODOS LOS PRESTAMOS
-	@GetMapping("/listarmateriales")
+	@GetMapping
 	public List<Prestamo> listarPrestamos(){
 		return prService.listarTodosPrestamo();
 	}
 	
 	
 }
+
+/*http://localhost:8080/prestamo/...*/
 

@@ -1,6 +1,7 @@
 package com.biblioteca.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ public class MaterialServiceImp implements IMaterialService {
 	}
 
 	@Override
-	public void eliminarMaterial(Material m) {
-		mr.delete(m);
+	public void eliminarMaterial(Long id) {
+		mr.deleteById(id);
 	}
 
 	@Override
@@ -35,8 +36,8 @@ public class MaterialServiceImp implements IMaterialService {
 	}
 
 	@Override
-	public Material buscarMaterialId(Long id) {
-		return mr.getOne(id);
+	public Optional<Material> buscarMaterialId(Long id) {
+		return mr.findById(id);
 	}
 
 }

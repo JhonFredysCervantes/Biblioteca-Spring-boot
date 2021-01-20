@@ -1,6 +1,7 @@
 package com.biblioteca.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,41 +24,63 @@ import com.biblioteca.services.ICategoriaService;
 public class CategoriaController {
 
 	@Autowired 
-	ICategoriaService cService;
+	private ICategoriaService cService;
 	
 	/*http://localhost:8080/categoria/...*/
 	
 	//CREAR UNA CATEGORIA
-	@PostMapping("/crear")
+	@PostMapping
 	public Categoria crear(@RequestBody Categoria c) {
 		return cService.crearCategoria(c);
 	}
 	
 	//EDITAR UNA CATEGORIA
-	@PutMapping("/editar/{id}")
+	@PutMapping("/{id}")
 	public Categoria editar(@RequestBody Categoria c, @PathVariable("id") Long id) {
-		Categoria oldCategoria = cService.buscarCategoriaId(id);
 		
-		String nombre_categoria = c.getNombreCategoria();
-		oldCategoria.setNombreCategoria(nombre_categoria);
-		
-		Set<Material> materiales = c.getMateriales();
-		oldCategoria.setMateriales(materiales);
-		
-		return cService.actualizarCategoria(oldCategoria);
+		if(id!=null) {
+			
+			Optional<Categoria> resultado =  cService.buscarCategoriaId(id);
+			
+			if(resultado.isPresent()) {
+				Categoria oldCategoria = resultado.get();
+				
+				String nombre_categoria = c.getNombreCategoria();
+				oldCategoria.setNombreCategoria(nombre_categoria);
+				
+				Set<Material> materiales = c.getMateriales();
+				oldCategoria.setMateriales(materiales);
+				
+				return cService.actualizarCategoria(oldCategoria);
+			}
+			
+		}
+		return null;
 	}
 	
-	//ELIMINAR UNA CATEGORIA
-	@DeleteMapping("/eliminar/{id}")
-	public void eliminar(@PathVariable("id") Long id) {
-		Categoria c = cService.buscarCategoriaId(id);
-		cService.eliminarCategoria(c);
+	//OBTENER UNA CATEGORIA
+	@GetMapping("/{id}")
+	public Categoria buscar(@PathVariable("id")Long id) {
+		if(id!=null) {
+			Optional<Categoria> resultado = cService.buscarCategoriaId(id);
+			if(resultado.isPresent()) {
+				return resultado.get();
+			}
+		}
+		
+		return null;
 	}
 	
 	//LISTANDO TODAS LAS CATEGORIAS
-	@GetMapping("/listarcategorias")
+	@GetMapping
 	public List<Categoria> listarCategorias(){
 		return cService.listarTodasCategorias();
+	}
+	
+	//ELIMINAR UNA CATEGORIA
+	@DeleteMapping("/{id}")
+	public void eliminar(@PathVariable("id") Long id) {
+		cService.eliminarCategoria(id);
 	}
 	
 	
